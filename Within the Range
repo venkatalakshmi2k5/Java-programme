@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Define the range
+        int lowerBound = 30;
+        int upperBound = 80;
+        // Ask user to input a value
+        System.out.print("Enter the value to check: ");
+        int value = sc.nextInt();
+        // Check if the value is within the range
+        if (value >= lowerBound && value <= upperBound) {
+            System.out.println("Value is within the range :" + lowerBound + upperBound );
+        } 
+        else {
+            System.out.println("Value is NOT within the range :" + lowerBound + upperBound );
+        }
+    }
+}
