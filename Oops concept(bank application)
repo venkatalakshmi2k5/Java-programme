@@ -1,97 +1,85 @@
-// step 02
+// step 02 
 
-abstract class Employee {
-    // Encapsulation: Private fields
-    private String name;
-    private double baseSalary;
-
-    // step 03 - constructor
-    public Employee(String name, double baseSalary) {
-        this.name = name;
-        this.baseSalary = baseSalary;
-    }
-
-    // Abstraction: Abstract method to be implemented by subclasses
-    public abstract void displayDetails();
-
-    // Encapsulation: Getter and Setter for name
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // Encapsulation: Getter and Setter for baseSalary
-    public double getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(double baseSalary) {
-        this.baseSalary = baseSalary;
-    }
-
-    // Polymorphism: General method for bonus (can be overridden)
-    public void calculateBonus() {
-        System.out.println("Generic bonus: " + (0.10 * baseSalary));
-    }
+abstract class BankAccount{
+    private   String AccountHolderName;
+    private double Balance; 
+     
+     // step 03 - creating a constructor 
+     
+     public BankAccount(String AccountHolderName, double Balance){
+         this.AccountHolderName=AccountHolderName;
+         this.Balance=Balance;
+     }
+     
+     
+     public abstract void displayDetails();
+     
+     // step 04 - encapsulation 
+     
+     public String getAccountHolderName(){
+         return AccountHolderName;
+     }
+     
+     public void setAccountHolderName(String AccountHolderName){
+         this.AccountHolderName=AccountHolderName;
+     }
+     
+     
+     public double getBalance(){
+         return Balance;
+     }
+     
+     public void setBalance(double Balance){
+         this.Balance = Balance;
+     }
+     
+     // polymorphism 
+     
+     public void deposit(double amount){
+         if(amount>0){
+             Balance += amount;
+             System.out.println("Deposited amount:" + amount);
+         }
+         else{
+             System.out.println("Deposit properly");
+         }
+     }
+     
+    public void withdraw(double amount){
+        if(amount>0 && amount<=Balance){
+            Balance -=amount;
+            System.out.println("Withdraw amount:" + amount);
+        }
+        else {
+            System.out.println("Invalid Amount");
+        }
+    } 
 }
 
-// step 04 - Inheritance and overriding
-class Manager extends Employee {
-    public Manager(String name, double baseSalary) {
-        super(name, baseSalary);
+class savingsAccount extends BankAccount{
+    public savingsAccount(String AccountHolderName, double Balance){
+        super(AccountHolderName, Balance);
     }
-
     @Override
-    public void displayDetails() {
-        System.out.println("Role: Manager");
-        System.out.println("Name: " + getName());
-        System.out.println("Base Salary: " + getBaseSalary());
+    public void displayDetails(){
+        System.out.println("Account Holder Name :" + getAccountHolderName());
+        System.out.println("Account Balance:" + getBalance());
     }
-
-    // Polymorphism: Overriding calculateBonus
-    @Override
-    public void calculateBonus() {
-        System.out.println("Manager Bonus: " + (0.20 * getBaseSalary()));
-    }
+    
 }
 
-// step 05 - Another subclass
-class Developer extends Employee {
-    public Developer(String name, double baseSalary) {
-        super(name, baseSalary);
-    }
-
-    @Override
-    public void displayDetails() {
-        System.out.println("Role: Developer");
-        System.out.println("Name: " + getName());
-        System.out.println("Base Salary: " + getBaseSalary());
-    }
-
-    // Polymorphism: Overriding calculateBonus
-    @Override
-    public void calculateBonus() {
-        System.out.println("Developer Bonus: " + (0.15 * getBaseSalary()));
-    }
-}
-
-// step 01 - Main class
-public class Main {
-    public static void main(String[] args) {
-        // Creating objects (Objects of subclasses)
-        Employee emp1 = new Manager("Alice", 70000);
-        Employee emp2 = new Developer("Bob", 50000);
-
-        // Calling methods
-        emp1.displayDetails();
-        emp1.calculateBonus();
-
-        System.out.println("------------------");
-
-        emp2.displayDetails();
-        emp2.calculateBonus();
+// step 01 
+public class Main{
+    public static void main(String[] args){
+     BankAccount savings = new savingsAccount("Bharanidharanm", 1000.00);
+     
+     savings.displayDetails();
+     
+     savings.deposit(2000.00);
+     savings.withdraw(500.00);
+     
+     savings.displayDetails();
+     
+        
     }
 }
